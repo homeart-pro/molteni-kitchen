@@ -1,0 +1,119 @@
+/* TOP INTRO (replaces hero banner — molteni.it doesn't use one) */
+.home-top {
+  padding: calc(88px + 40px) 0 clamp(48px, 8vw, 80px);
+  background: var(--color-warm-white);
+}
+.home-top__eyebrow {
+  display: block;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-muted);
+  margin-bottom: 16px;
+}
+.home-top__lead {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-dark);
+  max-width: 640px;
+  margin: 0;
+}
+
+/* INTRO */
+.home-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.home-intro__heading {
+  font-family: var(--font-heading);
+  font-size: var(--h2);
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 8px 0 24px;
+}
+.home-intro__body { font-size: 15px; line-height: 1.75; color: var(--color-muted); margin: 0 0 16px; }
+.home-intro__image img { width: 100%; border-radius: 4px; }
+
+/* COLLECTIONS GRID — molteni.it pattern: 2 columns, caption below image */
+.home-collections {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 32px;
+  margin-top: 40px;
+}
+.collection-card {
+  display: block;
+  min-width: 0;
+  position: relative;
+}
+.collection-card__img-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: var(--color-light-gray);
+}
+.collection-card__img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.collection-card:hover .collection-card__img-wrap img { transform: scale(1.03); }
+.collection-card__caption {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--color-dark);
+  margin: 0;
+}
+.collection-card__caption strong { font-weight: 600; }
+.collection-card__caption em { font-style: italic; font-weight: 400; color: var(--color-muted); }
+.collection-card__soon {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-light-gray);
+}
+.collection-card--soon .collection-card__img-wrap img { filter: grayscale(0.3); opacity: 0.85; }
+
+/* FACTS */
+.home-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.home-fact { display: flex; flex-direction: column; gap: 8px; }
+.home-fact__num {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3.5vw, 40px);
+  color: var(--color-dark);
+}
+.home-fact__label { font-size: 13px; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* FORM */
+.home-form { text-align: center; max-width: 520px; }
+.home-form__lead { color: var(--color-muted); margin-bottom: 32px; }
+.home-form__form { display: flex; flex-direction: column; gap: 16px; align-items: center; }
+.home-form__form input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--color-light-gray);
+  font-size: 14px;
+  font-family: var(--font-body);
+  min-height: 44px;
+}
+.home-form__note { font-size: 12px; color: var(--color-light-gray); margin-top: 16px; }
+
+/* MOBILE */
+@media (max-width: 767px) {
+  .home-top { padding-top: calc(88px + 24px); }
+  .home-intro { grid-template-columns: 1fr; gap: 32px; }
+  .home-intro > * { min-width: 0; }
+  .home-collections { grid-template-columns: 1fr; gap: 28px; }
+  .home-facts { grid-template-columns: 1fr; gap: 24px; }
+}

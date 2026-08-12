@@ -1,0 +1,135 @@
+---
+const { transparent = true } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const links = [
+  { href: `${base}/`, label: 'Главная' },
+  { href: `${base}/#collections`, label: 'Коллекции' },
+  { href: `${base}/#about`, label: 'О нас' },
+  { href: `${base}/#contacts`, label: 'Контакты' },
+];
+---
+<header class="hdr" id="hdr" data-transparent={transparent ? 'true' : 'false'}>
+  <div class="hdr__inner container">
+    <a href={`${base}/`} class="hdr__logo">Molteni&amp;C<span>KITCHEN</span></a>
+    <nav class="hdr__nav">
+      {links.map(l => <a href={l.href} class="hdr__link">{l.label}</a>)}
+    </nav>
+    <button class="hdr__burger" id="hdrBurger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <nav class="mobile-menu__nav">
+    {links.map(l => <a href={l.href} class="mobile-menu__link">{l.label}</a>)}
+  </nav>
+</div>
+
+<style>
+  .hdr {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: transparent;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hdr.is-scrolled {
+    background: var(--color-white);
+    box-shadow: 0 1px 0 var(--color-light-gray);
+  }
+  .hdr__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 88px;
+  }
+  .hdr__logo {
+    font-family: var(--font-logo);
+    font-size: 24px;
+    letter-spacing: 0;
+    color: var(--color-white);
+    display: flex; flex-direction: column; line-height: 1.15;
+    transition: color 0.3s ease;
+  }
+  .hdr.is-scrolled .hdr__logo { color: var(--color-dark); }
+  .hdr__logo span {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--color-sand);
+  }
+
+  .hdr__nav { display: flex; gap: 40px; }
+  .hdr__link {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-white);
+    transition: color 0.3s ease;
+  }
+  .hdr.is-scrolled .hdr__link { color: var(--color-dark); }
+  .hdr__link:hover { color: var(--color-sand); }
+
+  .hdr__burger {
+    display: none;
+    width: 44px; height: 44px;
+    background: transparent; border: none;
+    flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    cursor: pointer;
+  }
+  .hdr__burger span {
+    width: 24px; height: 1px;
+    background: var(--color-white);
+    transition: background 0.3s ease;
+  }
+  .hdr.is-scrolled .hdr__burger span { background: var(--color-dark); }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: var(--color-charcoal);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .mobile-menu.is-open { display: flex; }
+  .mobile-menu__nav { display: flex; flex-direction: column; gap: 28px; text-align: center; }
+  .mobile-menu__link {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    color: var(--color-white);
+    min-height: 44px;
+  }
+
+  @media (max-width: 900px) {
+    .hdr__nav { display: none; }
+    .hdr__burger { display: flex; }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var hdr = document.getElementById('hdr');
+    var burger = document.getElementById('hdrBurger');
+    var menu = document.getElementById('mobileMenu');
+    if (hdr.dataset.transparent === 'false') {
+      hdr.classList.add('is-scrolled');
+    } else {
+      var onScroll = function () {
+        if (window.scrollY > 40) hdr.classList.add('is-scrolled');
+        else hdr.classList.remove('is-scrolled');
+      };
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    }
+    burger.addEventListener('click', function () {
+      menu.classList.toggle('is-open');
+    });
+    Array.from(menu.querySelectorAll('a')).forEach(function (a) {
+      a.addEventListener('click', function () { menu.classList.remove('is-open'); });
+    });
+  })();
+</script>

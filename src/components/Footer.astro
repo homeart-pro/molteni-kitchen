@@ -1,0 +1,59 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<footer class="ftr" id="contacts">
+  <div class="container ftr__inner">
+    <div class="ftr__col">
+      <div class="ftr__logo">Molteni&amp;C<span>KITCHEN</span></div>
+      <p class="ftr__text">Официальный дилер Molteni&amp;C в России.<br />Кухни премиум-класса из Италии.</p>
+    </div>
+    <div class="ftr__col">
+      <h3 class="ftr__title">Контакты</h3>
+      <p class="ftr__text">+7 (000) 000-00-00<br />info@molteni-kitchen.ru</p>
+      <p class="ftr__text">Шоурум: Москва, [адрес уточняется]</p>
+    </div>
+    <div class="ftr__col">
+      <h3 class="ftr__title">Навигация</h3>
+      <a href={`${base}/#collections`} class="ftr__link">Коллекции</a>
+      <a href={`${base}/#about`} class="ftr__link">О нас</a>
+      <a href={`${base}/#contacts`} class="ftr__link">Контакты</a>
+    </div>
+  </div>
+  <div class="ftr__bottom container">
+    <p>&copy; {new Date().getFullYear()} Molteni Kitchen RU. Прототип сайта — не для публикации.</p>
+  </div>
+</footer>
+
+<style>
+  .ftr { background: var(--color-charcoal); color: var(--color-white); padding-top: clamp(56px, 8vw, 96px); }
+  .ftr__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .ftr__logo {
+    font-family: var(--font-logo);
+    font-size: 22px;
+    letter-spacing: 0;
+    margin-bottom: 16px;
+  }
+  .ftr__logo span {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--color-sand);
+  }
+  .ftr__title { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-sand); margin: 0 0 16px; }
+  .ftr__text { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.75); margin: 0 0 12px; }
+  .ftr__link { display: block; font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 12px; min-height: 44px; line-height: 44px; }
+  .ftr__link:hover { color: var(--color-white); }
+  .ftr__bottom { padding: 24px 0; }
+  .ftr__bottom p { font-size: 12px; color: rgba(255,255,255,0.4); margin: 0; }
+
+  @media (max-width: 767px) {
+    .ftr__inner { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>

@@ -1,0 +1,112 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/home.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const collections = [
+  { slug: 'physis', name: 'Physis', designer: 'Vincent Van Duysen', img: `${base}/images/collections/physis-cover.jpg`, live: true },
+  { slug: 'vvd', name: 'VVD', designer: 'Vincent Van Duysen', img: `${base}/images/collections/vvd-cover.jpg`, live: false },
+  { slug: 'intersection', name: 'Intersection', designer: 'Vincent Van Duysen', img: `${base}/images/collections/intersection-cover.jpg`, live: false },
+  { slug: 'ratio', name: 'Ratio', designer: 'Vincent Van Duysen', img: `${base}/images/collections/ratio-cover.jpg`, live: false },
+  { slug: 'prime', name: 'Prime', designer: '', img: `${base}/images/collections/prime-cover.jpg`, live: false },
+  { slug: 'hi-line-6', name: 'Hi-Line 6', designer: 'Ferruccio Laviani', img: `${base}/images/collections/hiline6-cover.jpg`, live: false },
+  { slug: 'tivali', name: 'Tivalì 2.0', designer: 'Yabu Pushelberg', img: `${base}/images/collections/tivali-cover.jpg`, live: false },
+  { slug: 'helios', name: 'Helios', designer: 'Vincent Van Duysen', img: `${base}/images/collections/helios-cover.jpg`, live: false },
+];
+---
+<Base title="Molteni Kitchen — официальный дилер кухонь Molteni&C в России" headerTransparent={false}>
+
+  <!-- TOP INTRO (no hero banner — matches molteni.it editorial listing style) -->
+  <section class="home-top" id="collections">
+    <div class="container">
+      <span class="home-top__eyebrow">( Кухни · 8 )</span>
+      <p class="home-top__lead">
+        Официальный дилер Molteni&amp;C в России. Коллекции воплощают Dada Engineering — инновационные
+        решения, безупречное мастерство и авторский дизайн, выражающие превосходство Made in Italy
+        в сердце дома.
+      </p>
+      <div class="home-collections">
+        {collections.map(c => (
+          c.live ? (
+            <a href={`${base}/collections/${c.slug}`} class="collection-card">
+              <div class="collection-card__img-wrap">
+                <img src={c.img} alt={c.name} loading="lazy" />
+              </div>
+              <p class="collection-card__caption">
+                <strong>{c.name.toUpperCase()}</strong> КУХНИ{c.designer && <> · <em>{c.designer.toUpperCase()}</em></>}
+              </p>
+            </a>
+          ) : (
+            <div class="collection-card collection-card--soon">
+              <div class="collection-card__img-wrap">
+                <img src={c.img} alt={c.name} loading="lazy" />
+              </div>
+              <p class="collection-card__caption">
+                <strong>{c.name.toUpperCase()}</strong> КУХНИ{c.designer && <> · <em>{c.designer.toUpperCase()}</em></>}
+              </p>
+              <span class="collection-card__soon">Страница скоро</span>
+            </div>
+          )
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="section section--warm">
+    <div class="container home-intro">
+      <div class="home-intro__text">
+        <span class="caption" style="text-align:left;">О бренде</span>
+        <h2 class="home-intro__heading">Инновации, мастерство и итальянский дизайн</h2>
+        <p class="home-intro__body">
+          Molteni&amp;C — одна из ведущих итальянских мебельных мануфактур, объединяющая наследие
+          семейного бизнеса с работой лучших дизайнеров современности: Vincent Van Duysen,
+          Ferruccio Laviani, Yabu Pushelberg. Кухонные коллекции бренда сочетают точную архитектуру,
+          натуральные материалы и безупречное качество исполнения.
+        </p>
+        <p class="home-intro__body">
+          Мы — официальный дилер Molteni&amp;C в России: консультации, подбор конфигураций и материалов,
+          сопровождение проекта от эскиза до установки.
+        </p>
+      </div>
+      <div class="home-intro__image">
+        <img src={`${base}/images/collections/physis/intro.jpg`} alt="Кухня Molteni Physis" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- FACTS -->
+  <section class="section section--warm" id="about">
+    <div class="container home-facts">
+      <div class="home-fact">
+        <span class="home-fact__num">1934</span>
+        <span class="home-fact__label">Год основания Molteni&amp;C</span>
+      </div>
+      <div class="home-fact">
+        <span class="home-fact__num">100%</span>
+        <span class="home-fact__label">Made in Italy</span>
+      </div>
+      <div class="home-fact">
+        <span class="home-fact__num">8</span>
+        <span class="home-fact__label">Кухонных коллекций</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / LEAD FORM -->
+  <section class="section section--white">
+    <div class="container home-form">
+      <span class="caption">Консультация</span>
+      <h2 class="heading">Обсудить проект кухни</h2>
+      <p class="home-form__lead">Оставьте контакты — подберём коллекцию и конфигурацию под ваш интерьер.</p>
+      <form class="home-form__form">
+        <input type="text" name="name" placeholder="Ваше имя" required />
+        <input type="tel" name="phone" placeholder="Телефон" required />
+        <button type="submit" class="ghost-btn">Отправить</button>
+      </form>
+      <p class="home-form__note">Форма — заглушка прототипа, без реальной отправки.</p>
+    </div>
+  </section>
+
+</Base>
