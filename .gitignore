@@ -2,3 +2,5 @@ node_modules/
 dist/
 .astro/
 *.log
+/check-*.png
+/deploy-check-*.png
