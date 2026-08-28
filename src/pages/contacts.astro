@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+---
+<Base
+  title="Контакты — Molteni Kitchen"
+  description="Свяжитесь с официальным дилером Molteni&C в России: телефон, email, консультация по проекту."
+  headerTransparent={false}
+>
+  <section class="page-hero">
+    <span class="page-hero__eyebrow">( Контакты )</span>
+    <h1 class="page-hero__title">Свяжитесь с нами</h1>
+  </section>
+
+  <section class="section section--white">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <dl>
+          <dt>Телефон</dt>
+          <dd><em>уточняется</em></dd>
+          <dt>Email</dt>
+          <dd>info@molteni-kitchen.ru</dd>
+          <dt>Шоурум</dt>
+          <dd><em>адрес уточняется</em></dd>
+        </dl>
+      </div>
+      <div>
+        <form class="contact-form">
+          <input type="text" name="name" placeholder="Ваше имя" required />
+          <input type="tel" name="phone" placeholder="Телефон" required />
+          <input type="text" name="message" placeholder="Комментарий" />
+          <button type="submit" class="ghost-btn">Отправить</button>
+        </form>
+        <p class="contact-form__note" style="margin-top:16px;">Форма — заглушка прототипа, без реальной отправки.</p>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,65 @@
+/* Generic collection page template — shares visual language with physis.css
+   but leaner: no configs/materials/tabs sections since we don't have sourced
+   per-collection data for those beyond Physis. */
+
+.col-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.col-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.col-hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.55) 100%);
+}
+.col-hero__content { position: relative; z-index: 2; color: #fff; padding-bottom: clamp(48px, 8vw, 100px); max-width: 720px; }
+.col-hero__badge {
+  display: inline-block;
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--color-sand);
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 6px 14px; margin-bottom: 20px;
+}
+.col-hero__title { font-family: var(--font-heading); font-size: var(--h1); font-weight: 400; margin: 0 0 12px; letter-spacing: 0; }
+.col-hero__subtitle { font-size: 17px; color: rgba(255,255,255,0.85); margin: 0; }
+
+/* INTRO */
+.col-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.col-intro__name { font-family: var(--font-heading); font-size: 28px; font-weight: 500; margin: 0 0 12px; }
+.col-intro__lead { font-size: 18px; color: var(--color-dark); margin: 0 0 16px; }
+.col-intro__body { font-size: 15px; line-height: 1.75; color: var(--color-muted); margin: 0; }
+.col-intro__image img { width: 100%; border-radius: 4px; }
+
+/* DETAIL — single wide breathing image, no tabs */
+.col-detail img { width: 100%; max-height: 640px; object-fit: cover; border-radius: 4px; }
+
+/* DESIGNER — centered, same pattern as physis */
+.col-designer { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 560px; margin: 0 auto; }
+.col-designer__photo { width: 128px; height: 128px; margin-bottom: 24px; }
+.col-designer__photo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.col-designer__name { margin-bottom: 16px; }
+.col-designer__text { font-size: 15px; line-height: 1.75; color: var(--color-muted); margin: 0; }
+
+/* FORM — same pattern as physis/home */
+.col-form { text-align: center; max-width: 520px; }
+.col-form__lead { color: var(--color-muted); margin-bottom: 32px; }
+
+/* OTHER COLLECTIONS */
+.col-other { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-top: 48px; max-width: 720px; margin-left: auto; margin-right: auto; }
+.col-other-card { min-width: 0; }
+.col-other-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 4px; margin-bottom: 12px; }
+.col-other-card h3 { font-family: var(--font-heading); font-size: 16px; font-weight: 500; margin: 0 0 4px; }
+.col-other-card p { font-size: 12px; color: var(--color-muted); margin: 0; }
+
+@media (max-width: 900px) {
+  .col-intro { grid-template-columns: 1fr; }
+}
+@media (max-width: 767px) {
+  .col-hero { min-height: 500px; height: 85vh; }
+  .col-intro, .col-other { gap: 32px; }
+  .col-intro > *, .col-other > * { min-width: 0; }
+}

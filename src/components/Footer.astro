@@ -9,18 +9,26 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </div>
     <div class="ftr__col">
       <h3 class="ftr__title">Контакты</h3>
-      <p class="ftr__text">+7 (000) 000-00-00<br />info@molteni-kitchen.ru</p>
-      <p class="ftr__text">Шоурум: Москва, [адрес уточняется]</p>
+      <p class="ftr__text">Телефон: уточняется<br />info@molteni-kitchen.ru</p>
+      <p class="ftr__text">Шоурум: адрес уточняется</p>
     </div>
     <div class="ftr__col">
       <h3 class="ftr__title">Навигация</h3>
-      <a href={`${base}/#collections`} class="ftr__link">Коллекции</a>
-      <a href={`${base}/#about`} class="ftr__link">О нас</a>
-      <a href={`${base}/#contacts`} class="ftr__link">Контакты</a>
+      <a href={`${base}/collections`} class="ftr__link">Коллекции</a>
+      <a href={`${base}/about`} class="ftr__link">О бренде</a>
+      <a href={`${base}/showroom`} class="ftr__link">Шоурум</a>
+      <a href={`${base}/contacts`} class="ftr__link">Контакты</a>
     </div>
   </div>
   <div class="ftr__bottom container">
-    <p>&copy; {new Date().getFullYear()} Molteni Kitchen RU. Прототип сайта — не для публикации.</p>
+    <p>&copy; {new Date().getFullYear()} Molteni Kitchen RU.</p>
+    <nav class="ftr__legal" aria-label="Правовые документы">
+      <a href={`${base}/privacy`} class="ftr__legal-link">Обработка персональных данных</a>
+      <a href={`${base}/cookies`} class="ftr__legal-link">Cookies</a>
+      <a href={`${base}/user-agreement`} class="ftr__legal-link">Пользовательское соглашение</a>
+      <a href={`${base}/personal-data-consent`} class="ftr__legal-link">Согласие на обработку ПД</a>
+      <a href={`${base}/marketing-consent`} class="ftr__legal-link">Согласие на рассылку</a>
+    </nav>
   </div>
 </footer>
 
@@ -50,10 +58,21 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   .ftr__text { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.75); margin: 0 0 12px; }
   .ftr__link { display: block; font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 12px; min-height: 44px; line-height: 44px; }
   .ftr__link:hover { color: var(--color-white); }
-  .ftr__bottom { padding: 24px 0; }
+  .ftr__bottom { padding: 24px 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; }
   .ftr__bottom p { font-size: 12px; color: rgba(255,255,255,0.4); margin: 0; }
+  .ftr__legal { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .ftr__legal-link {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding-bottom: 1px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+  }
+  .ftr__legal-link:hover { color: var(--color-sand); border-color: var(--color-sand); }
 
   @media (max-width: 767px) {
     .ftr__inner { grid-template-columns: 1fr; gap: 32px; }
+    .ftr__bottom { flex-direction: column; align-items: flex-start; }
   }
 </style>

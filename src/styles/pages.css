@@ -1,0 +1,40 @@
+/* Shared simple content pages: About, Showroom, Contacts */
+
+.page-hero {
+  padding: calc(88px + 64px) 0 48px;
+  background: var(--color-warm-white);
+  text-align: center;
+}
+.page-hero__eyebrow {
+  display: block;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--color-muted);
+  margin-bottom: 16px;
+}
+.page-hero__title {
+  font-family: var(--font-heading);
+  font-size: var(--h1);
+  font-weight: 400;
+  margin: 0;
+}
+
+.page-body { max-width: 720px; margin: 0 auto; }
+.page-body p { font-size: 16px; line-height: 1.8; color: var(--color-muted); margin: 0 0 20px; }
+.page-body h2 { font-family: var(--font-heading); font-size: 22px; font-weight: 500; color: var(--color-dark); margin: 40px 0 16px; }
+.page-body h2:first-child { margin-top: 0; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.contact-info dl { margin: 0; }
+.contact-info dt { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-sand); margin-top: 24px; }
+.contact-info dt:first-child { margin-top: 0; }
+.contact-info dd { font-size: 16px; color: var(--color-dark); margin: 6px 0 0; }
+
+@media (max-width: 767px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+}

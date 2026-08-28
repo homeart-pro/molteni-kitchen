@@ -7,7 +7,55 @@ const {
   title,
   description = 'Molteni Kitchen — официальный дилер кухонь Molteni&C в России.',
   headerTransparent = true,
+  noindex = false,
+  ogImage,
 } = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage ?? `${base}/images/collections/physis-cover.jpg`, Astro.site).toString();
+
+// The GitHub Pages preview is for internal review only — never let it get indexed,
+// regardless of what a given page passes in.
+const isPreviewHost = Astro.site?.hostname?.includes('github.io') ?? false;
+const effectiveNoindex = noindex || isPreviewHost;
+
+// Auto breadcrumb from URL path — no per-page authoring needed.
+const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+const segmentLabels: Record<string, string> = {
+  collections: 'Коллекции',
+  about: 'О бренде',
+  showroom: 'Шоурум',
+  contacts: 'Контакты',
+};
+const breadcrumbItems = [
+  { name: 'Главная', item: new URL(`${base}/`, Astro.site).toString() },
+  ...pathSegments.map((seg, i) => ({
+    name: segmentLabels[seg] ?? seg,
+    item: new URL(`${base}/${pathSegments.slice(0, i + 1).join('/')}`, Astro.site).toString(),
+  })),
+];
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems.map((b, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: b.name,
+    item: b.item,
+  })),
+};
+
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FurnitureStore',
+  '@id': `${new URL(base + '/', Astro.site)}#organization`,
+  name: 'Molteni Kitchen',
+  alternateName: 'Официальный дилер Molteni&C в России',
+  url: new URL(`${base}/`, Astro.site).toString(),
+  logo: ogImageURL,
+  brand: { '@type': 'Brand', name: 'Molteni&C' },
+};
 ---
 <!DOCTYPE html>
 <html lang="ru">
@@ -16,7 +64,28 @@ const {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href={canonicalURL} />
+  {effectiveNoindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageURL} />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:site_name" content="Molteni Kitchen" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageURL} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
 </head>
 <body>
   <Header transparent={headerTransparent} />

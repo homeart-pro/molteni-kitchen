@@ -1,19 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import '../styles/home.css';
+import { collections as collectionsData } from '../data/collections';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-const collections = [
-  { slug: 'physis', name: 'Physis', designer: 'Vincent Van Duysen', img: `${base}/images/collections/physis-cover.jpg`, live: true },
-  { slug: 'vvd', name: 'VVD', designer: 'Vincent Van Duysen', img: `${base}/images/collections/vvd-cover.jpg`, live: false },
-  { slug: 'intersection', name: 'Intersection', designer: 'Vincent Van Duysen', img: `${base}/images/collections/intersection-cover.jpg`, live: false },
-  { slug: 'ratio', name: 'Ratio', designer: 'Vincent Van Duysen', img: `${base}/images/collections/ratio-cover.jpg`, live: false },
-  { slug: 'prime', name: 'Prime', designer: '', img: `${base}/images/collections/prime-cover.jpg`, live: false },
-  { slug: 'hi-line-6', name: 'Hi-Line 6', designer: 'Ferruccio Laviani', img: `${base}/images/collections/hiline6-cover.jpg`, live: false },
-  { slug: 'tivali', name: 'Tivalì 2.0', designer: 'Yabu Pushelberg', img: `${base}/images/collections/tivali-cover.jpg`, live: false },
-  { slug: 'helios', name: 'Helios', designer: 'Vincent Van Duysen', img: `${base}/images/collections/helios-cover.jpg`, live: false },
-];
+const collections = collectionsData.map((c) => ({
+  slug: c.slug,
+  name: c.name,
+  designer: c.designer ?? '',
+  img: `${base}/images/collections/${c.slug}-cover.jpg`,
+}));
 ---
 <Base title="Molteni Kitchen — официальный дилер кухонь Molteni&C в России" headerTransparent={false}>
 
@@ -28,26 +25,14 @@ const collections = [
       </p>
       <div class="home-collections">
         {collections.map(c => (
-          c.live ? (
-            <a href={`${base}/collections/${c.slug}`} class="collection-card">
-              <div class="collection-card__img-wrap">
-                <img src={c.img} alt={c.name} loading="lazy" />
-              </div>
-              <p class="collection-card__caption">
-                <strong>{c.name.toUpperCase()}</strong> КУХНИ{c.designer && <> · <em>{c.designer.toUpperCase()}</em></>}
-              </p>
-            </a>
-          ) : (
-            <div class="collection-card collection-card--soon">
-              <div class="collection-card__img-wrap">
-                <img src={c.img} alt={c.name} loading="lazy" />
-              </div>
-              <p class="collection-card__caption">
-                <strong>{c.name.toUpperCase()}</strong> КУХНИ{c.designer && <> · <em>{c.designer.toUpperCase()}</em></>}
-              </p>
-              <span class="collection-card__soon">Страница скоро</span>
+          <a href={`${base}/collections/${c.slug}`} class="collection-card">
+            <div class="collection-card__img-wrap">
+              <img src={c.img} alt={c.name} loading="lazy" />
             </div>
-          )
+            <p class="collection-card__caption">
+              <strong>{c.name.toUpperCase()}</strong> КУХНИ{c.designer && <> · <em>{c.designer.toUpperCase()}</em></>}
+            </p>
+          </a>
         ))}
       </div>
     </div>
@@ -100,12 +85,12 @@ const collections = [
       <span class="caption">Консультация</span>
       <h2 class="heading">Обсудить проект кухни</h2>
       <p class="home-form__lead">Оставьте контакты — подберём коллекцию и конфигурацию под ваш интерьер.</p>
-      <form class="home-form__form">
+      <form class="contact-form">
         <input type="text" name="name" placeholder="Ваше имя" required />
         <input type="tel" name="phone" placeholder="Телефон" required />
         <button type="submit" class="ghost-btn">Отправить</button>
       </form>
-      <p class="home-form__note">Форма — заглушка прототипа, без реальной отправки.</p>
+      <p class="contact-form__note">Форма — заглушка прототипа, без реальной отправки.</p>
     </div>
   </section>
 

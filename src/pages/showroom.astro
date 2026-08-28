@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/pages.css';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base
+  title="Шоурум Molteni Kitchen в России"
+  description="Шоурум официального дилера Molteni&C в России — адрес, часы работы, запись на визит."
+  headerTransparent={false}
+>
+  <section class="page-hero">
+    <span class="page-hero__eyebrow">( Шоурум )</span>
+    <h1 class="page-hero__title">Посетите шоурум</h1>
+  </section>
+
+  <section class="section section--white">
+    <div class="container page-body">
+      <p>
+        В шоуруме можно увидеть материалы отделки, конфигурации и фурнитуру Molteni&amp;C вживую,
+        обсудить проект с консультантом и подобрать решение под ваш интерьер.
+      </p>
+      <h2>Адрес и часы работы</h2>
+      <p><em>Адрес шоурума уточняется — заполните перед публикацией сайта.</em></p>
+      <h2>Запись на визит</h2>
+      <p>
+        Оставьте контакты на <a href={`${base}/contacts`} style="text-decoration: underline;">странице контактов</a>,
+        и мы согласуем удобное время визита.
+      </p>
+    </div>
+  </section>
+</Base>

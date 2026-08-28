@@ -1,13 +1,27 @@
 ---
 import Base from '../../layouts/Base.astro';
 import '../../styles/physis.css';
+import { collections } from '../../data/collections';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const others = collections.filter((c) => c.slug !== 'physis').slice(0, 2);
+
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Physis — Molteni&C',
+  description: 'Physis — кухня Molteni&C от Vincent Van Duysen. Натуральный камень, архитектурная точность.',
+  brand: { '@type': 'Brand', name: 'Molteni&C' },
+  creator: { '@type': 'Person', name: 'Vincent Van Duysen' },
+  image: new URL(`${base}/images/collections/physis-cover.jpg`, Astro.site).toString(),
+  countryOfOrigin: 'IT',
+};
 ---
 <Base
   title="Physis — кухня Molteni&C | Vincent Van Duysen"
   description="Physis — кухня Molteni&C от Vincent Van Duysen. Натуральный камень, архитектурная точность, Made in Italy."
 >
+  <script type="application/ld+json" set:html={JSON.stringify(productLd)} />
 
   <!-- 1. HERO -->
   <section class="physis-hero">
@@ -158,12 +172,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <span class="caption">Консультация</span>
       <h2 class="heading">Обсудить проект<br />из коллекции Physis</h2>
       <p class="physis-form__lead">Персональная консультация по конфигурации и материалам.</p>
-      <form class="physis-form__form">
+      <form class="contact-form">
         <input type="text" name="name" placeholder="Ваше имя" required />
         <input type="tel" name="phone" placeholder="Телефон" required />
         <button type="submit" class="ghost-btn">Отправить</button>
       </form>
-      <p class="physis-form__note">Форма — заглушка прототипа, без реальной отправки.</p>
+      <p class="contact-form__note">Форма — заглушка прототипа, без реальной отправки.</p>
     </div>
   </section>
 
@@ -172,16 +186,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <div class="container" style="text-align:center;">
       <h2 class="heading">Смотрите также</h2>
       <div class="physis-other-collections">
-        <div class="physis-other-card">
-          <img src={`${base}/images/collections/vvd-cover.jpg`} alt="VVD" loading="lazy" />
-          <h3>VVD</h3>
-          <p>Страница коллекции скоро</p>
-        </div>
-        <div class="physis-other-card">
-          <img src={`${base}/images/collections/ratio-cover.jpg`} alt="Ratio" loading="lazy" />
-          <h3>Ratio</h3>
-          <p>Страница коллекции скоро</p>
-        </div>
+        {others.map((o) => (
+          <a href={`${base}/collections/${o.slug}`} class="physis-other-card">
+            <img src={`${base}/images/collections/${o.slug}-cover.jpg`} alt={o.name} loading="lazy" />
+            <h3>{o.name}</h3>
+            {o.designer && <p>{o.designer}</p>}
+          </a>
+        ))}
       </div>
     </div>
   </section>

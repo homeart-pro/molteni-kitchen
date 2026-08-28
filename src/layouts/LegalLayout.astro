@@ -1,0 +1,16 @@
+---
+import Base from './Base.astro';
+import '../styles/legal.css';
+
+const { title, description } = Astro.props;
+---
+<Base title={title} description={description} noindex={true} headerTransparent={false}>
+  <div class="legal-page">
+    <div class="legal-container">
+      <h1 class="legal-title">{title}</h1>
+      <div class="legal-body">
+        <slot />
+      </div>
+    </div>
+  </div>
+</Base>
