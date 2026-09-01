@@ -59,22 +59,26 @@
 |---|---|---|
 | `{slug}-cover.jpg` | Главная (карточка), Индекс коллекций, Hero страницы /collections/{slug}, карточки «Смотрите также» на других страницах | карточка — 4:3 cover; hero — full-bleed 100vh cover |
 | `{slug}/intro.jpg` | Секция intro на странице коллекции | свободная высота, cover |
-| `{slug}/detail-1.jpg` | Секция «деталь» (одна широкая фотография) | до 640px высотой, cover |
+| `{slug}/detail-1.jpg` | Галерея «деталь», фото 1 из 3 | 3:4, cover |
+| `{slug}/detail-2.jpg` | Галерея «деталь», фото 2 из 3 | 3:4, cover |
+| `{slug}/detail-3.jpg` | Галерея «деталь», фото 3 из 3 | 3:4, cover |
 | `{slug}/designer.jpg` | ⚠️ только у `hi-line-6` и `tivali` — портрет, см. раздел выше | круг, 128×128 |
 
-**Полный список файлов по коллекциям:**
+**Полный список файлов по коллекциям** (обновлено 2026-09-01 — добавлено по 2 фото на коллекцию):
 
-- **vvd**: `vvd-cover.jpg`, `vvd/intro.jpg`, `vvd/detail-1.jpg`
-- **intersection**: `intersection-cover.jpg`, `intersection/intro.jpg`, `intersection/detail-1.jpg`
-- **ratio**: `ratio-cover.jpg`, `ratio/intro.jpg`, `ratio/detail-1.jpg`
-- **prime**: `prime-cover.jpg`, `prime/intro.jpg`, `prime/detail-1.jpg`
-- **hi-line-6**: `hi-line-6-cover.jpg`, `hi-line-6/intro.jpg`, `hi-line-6/detail-1.jpg`, `hi-line-6/designer.jpg` ⚠️
-- **tivali**: `tivali-cover.jpg`, `tivali/intro.jpg`, `tivali/detail-1.jpg`, `tivali/designer.jpg` ⚠️
-- **helios**: `helios-cover.jpg`, `helios/intro.jpg`, `helios/detail-1.jpg` (уличная кухня — при обработке не менять контекст «на улице»)
+- **vvd**: `vvd-cover.jpg`, `vvd/intro.jpg`, `vvd/detail-1.jpg`, `vvd/detail-2.jpg`, `vvd/detail-3.jpg`
+- **intersection**: `intersection-cover.jpg`, `intersection/intro.jpg`, `intersection/detail-1.jpg`, `intersection/detail-2.jpg`, `intersection/detail-3.jpg`
+- **ratio**: `ratio-cover.jpg`, `ratio/intro.jpg`, `ratio/detail-1.jpg`, `ratio/detail-2.jpg`, `ratio/detail-3.jpg`
+- **prime**: `prime-cover.jpg`, `prime/intro.jpg`, `prime/detail-1.jpg`, `prime/detail-2.jpg`, `prime/detail-3.jpg`
+- **hi-line-6**: `hi-line-6-cover.jpg`, `hi-line-6/intro.jpg`, `hi-line-6/detail-1.jpg`, `hi-line-6/detail-2.jpg`, `hi-line-6/detail-3.jpg`, `hi-line-6/designer.jpg` ⚠️
+- **tivali**: `tivali-cover.jpg`, `tivali/intro.jpg`, `tivali/detail-1.jpg`, `tivali/detail-2.jpg`, `tivali/detail-3.jpg`, `tivali/designer.jpg` ⚠️
+- **helios**: `helios-cover.jpg`, `helios/intro.jpg`, `helios/detail-1.jpg`, `helios/detail-2.jpg`, `helios/detail-3.jpg` (уличная кухня — при обработке не менять контекст «на улице»)
 
 ---
 
-## Итого: 35 файлов, из них 3 — портреты (см. предупреждение выше), 32 — фото кухонь/интерьеров.
+## Итого: 50 файлов, из них 3 — портреты (см. предупреждение выше), 47 — фото кухонь/интерьеров.
+
+Каждая из 8 коллекций теперь имеет не менее 4 разных фото продукции (Physis — 12, остальные — по 5).
 
 Когда Михаил вернёт готовое — просто пришлите мне файлы (той же структурой папок и именами),
 я разложу по местам и передеплою. Ошибиться местом файла невозможно, если имена совпадают —
