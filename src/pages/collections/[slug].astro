@@ -59,8 +59,20 @@ const productLd = {
     </div>
   </section>
 
+  <!-- HIGHLIGHTS — real, specific facts, shown separately so they don't get lost in prose -->
+  {collection.highlights.length > 0 && (
+    <section class="section section--white">
+      <div class="container col-highlights">
+        <span class="caption">Особенности</span>
+        <ul class="col-highlights__list">
+          {collection.highlights.map((h) => <li>{h}</li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+
   <!-- DETAIL GALLERY -->
-  <section class="section section--white col-detail">
+  <section class="section section--warm col-detail">
     <div class="container col-detail__grid">
       <img src={`${base}/images/collections/${collection.slug}/detail-1.jpg`} alt={`${collection.name} — деталь 1`} loading="lazy" data-lightbox />
       <img src={`${base}/images/collections/${collection.slug}/detail-2.jpg`} alt={`${collection.name} — деталь 2`} loading="lazy" data-lightbox />
@@ -70,7 +82,7 @@ const productLd = {
 
   <!-- DESIGNER -->
   {collection.designer && collection.hasDesignerPhoto && (
-    <section class="section section--warm">
+    <section class="section section--white">
       <div class="container col-designer">
         <div class="col-designer__photo">
           <img src={`${base}/images/collections/${collection.slug}/designer.jpg`} alt={collection.designer} loading="lazy" />
@@ -82,7 +94,7 @@ const productLd = {
   )}
 
   <!-- FORM -->
-  <section class="section section--white" id="form">
+  <section class="section section--warm" id="form">
     <div class="container col-form">
       <span class="caption">Консультация</span>
       <h2 class="heading">Обсудить проект<br />из коллекции {collection.name}</h2>
@@ -97,7 +109,7 @@ const productLd = {
   </section>
 
   <!-- OTHER COLLECTIONS -->
-  <section class="section section--warm">
+  <section class="section section--white">
     <div class="container" style="text-align:center;">
       <span class="caption">Коллекции</span>
       <h2 class="heading">Смотрите также</h2>

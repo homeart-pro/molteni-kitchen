@@ -34,6 +34,25 @@
 .col-intro__body { font-size: 15px; line-height: 1.75; color: var(--color-muted); margin: 0; }
 .col-intro__image img { width: 100%; border-radius: 4px; }
 
+/* HIGHLIGHTS — real, specific facts, kept visually separate from body prose */
+.col-highlights { max-width: 640px; margin: 0 auto; text-align: center; }
+.col-highlights__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.col-highlights__list li {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-dark);
+  padding-top: 16px;
+  border-top: 1px solid var(--color-light-gray);
+}
+.col-highlights__list li:first-child { border-top: none; padding-top: 0; }
+
 /* DETAIL GALLERY — 3 photos, no tabs */
 .col-detail__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .col-detail__grid img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; }
