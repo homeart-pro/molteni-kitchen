@@ -26,8 +26,8 @@ const productLd = {
 };
 ---
 <Base
-  title={`${collection.name} — кухня Molteni&C${collection.designer ? ' | ' + collection.designer : ''}`}
-  description={`${collection.name} — кухня Molteni&C. ${collection.lead} Made in Italy.`}
+  title={`${collection.name} — ${collection.outdoor ? 'уличная кухня' : 'кухня'} Molteni&C${collection.designer ? ' | ' + collection.designer : ''}`}
+  description={`${collection.name} — ${collection.outdoor ? 'уличная кухня (outdoor)' : 'кухня'} Molteni&C. ${collection.lead} Made in Italy.`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(productLd)} />
 

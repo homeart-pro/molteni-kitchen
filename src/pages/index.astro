@@ -12,16 +12,21 @@ const collections = collectionsData.map((c) => ({
   img: `${base}/images/collections/${c.slug}-cover.jpg`,
 }));
 ---
-<Base title="Molteni Kitchen — официальный дилер кухонь Molteni&C в России" headerTransparent={false}>
+<Base
+  title="Кухни Molteni&C (Молтени) в России — официальный дилер"
+  description="Официальный дилер Molteni&C (Молтени) в России. 8 кухонных коллекций Made in Italy: Physis, VVD, Ratio, Prime и другие. Консультация, подбор конфигурации."
+  headerTransparent={false}
+>
 
   <!-- TOP INTRO (no hero banner — matches molteni.it editorial listing style) -->
   <section class="home-top" id="collections">
     <div class="container">
       <span class="home-top__eyebrow">( Кухни · 8 )</span>
+      <h1 class="home-top__title">Кухни Molteni&amp;C в России</h1>
       <p class="home-top__lead">
-        Официальный дилер Molteni&amp;C в России. Коллекции воплощают Dada Engineering — инновационные
-        решения, безупречное мастерство и авторский дизайн, выражающие превосходство Made in Italy
-        в сердце дома.
+        Официальный дилер Molteni&amp;C (Молтени) в России. Коллекции воплощают Dada Engineering —
+        инновационные решения, безупречное мастерство и авторский дизайн, выражающие превосходство
+        Made in Italy в сердце дома.
       </p>
       <div class="home-collections">
         {collections.map(c => (

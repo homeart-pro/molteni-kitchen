@@ -21,7 +21,12 @@ const isPreviewHost = Astro.site?.hostname?.includes('github.io') ?? false;
 const effectiveNoindex = noindex || isPreviewHost;
 
 // Auto breadcrumb from URL path — no per-page authoring needed.
-const pathSegments = Astro.url.pathname.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
+// Strip the deploy base (e.g. "/molteni-kitchen" on the GH Pages preview) first,
+// otherwise the base segment itself shows up as a fake breadcrumb entry.
+const pathWithoutBase = base && Astro.url.pathname.startsWith(base)
+  ? Astro.url.pathname.slice(base.length)
+  : Astro.url.pathname;
+const pathSegments = pathWithoutBase.replace(/^\/|\/$/g, '').split('/').filter(Boolean);
 const segmentLabels: Record<string, string> = {
   collections: 'Коллекции',
   about: 'О бренде',
@@ -53,7 +58,8 @@ const organizationLd = {
   name: 'Molteni Kitchen',
   alternateName: 'Официальный дилер Molteni&C в России',
   url: new URL(`${base}/`, Astro.site).toString(),
-  logo: ogImageURL,
+  // No `logo` field yet — omitting is more honest than pointing it at a lifestyle
+  // photo, which is what ogImageURL is. Add a real logo file before launch.
   brand: { '@type': 'Brand', name: 'Molteni&C' },
 };
 ---
