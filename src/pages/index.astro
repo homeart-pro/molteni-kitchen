@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import '../styles/home.css';
 import { collections as collectionsData } from '../data/collections';
+import { homeFaq } from '../data/faq';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -11,12 +12,23 @@ const collections = collectionsData.map((c) => ({
   designer: c.designer ?? '',
   img: `${base}/images/collections/${c.slug}-cover.jpg`,
 }));
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeFaq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: { '@type': 'Answer', text: item.answer },
+  })),
+};
 ---
 <Base
   title="Molteni&C (Молтени) — официальный дилер кухонь в России"
   description="Официальный дилер Molteni&C (Молтени) в России — элитные кухни премиум-класса из Италии. 8 коллекций: Physis, VVD, Ratio, Prime и другие. Консультация, подбор конфигурации."
   headerTransparent={false}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
 
   <!-- TOP INTRO (no hero banner — matches molteni.it editorial listing style) -->
   <section class="home-top" id="collections">
@@ -80,6 +92,21 @@ const collections = collectionsData.map((c) => ({
       <div class="home-fact">
         <span class="home-fact__num">8</span>
         <span class="home-fact__label">Кухонных коллекций</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--white">
+    <div class="container home-faq">
+      <h2 class="heading">Частые вопросы</h2>
+      <div class="home-faq__list">
+        {homeFaq.map((item) => (
+          <details class="home-faq__item">
+            <summary class="home-faq__question">{item.question}</summary>
+            <p class="home-faq__answer">{item.answer}</p>
+          </details>
+        ))}
       </div>
     </div>
   </section>
