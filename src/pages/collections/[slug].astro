@@ -54,7 +54,7 @@ const productLd = {
         <p class="col-intro__body">{collection.body}</p>
       </div>
       <div class="col-intro__image">
-        <img src={`${base}/images/collections/${collection.slug}/intro.jpg`} alt={`Кухня ${collection.name}, общий вид`} loading="lazy" />
+        <img src={`${base}/images/collections/${collection.slug}/intro.jpg`} alt={`Кухня ${collection.name}, общий вид`} loading="lazy" data-lightbox />
       </div>
     </div>
   </section>
@@ -62,9 +62,9 @@ const productLd = {
   <!-- DETAIL GALLERY -->
   <section class="section section--white col-detail">
     <div class="container col-detail__grid">
-      <img src={`${base}/images/collections/${collection.slug}/detail-1.jpg`} alt={`${collection.name} — деталь 1`} loading="lazy" />
-      <img src={`${base}/images/collections/${collection.slug}/detail-2.jpg`} alt={`${collection.name} — деталь 2`} loading="lazy" />
-      <img src={`${base}/images/collections/${collection.slug}/detail-3.jpg`} alt={`${collection.name} — деталь 3`} loading="lazy" />
+      <img src={`${base}/images/collections/${collection.slug}/detail-1.jpg`} alt={`${collection.name} — деталь 1`} loading="lazy" data-lightbox />
+      <img src={`${base}/images/collections/${collection.slug}/detail-2.jpg`} alt={`${collection.name} — деталь 2`} loading="lazy" data-lightbox />
+      <img src={`${base}/images/collections/${collection.slug}/detail-3.jpg`} alt={`${collection.name} — деталь 3`} loading="lazy" data-lightbox />
     </div>
   </section>
 

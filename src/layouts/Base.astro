@@ -99,5 +99,37 @@ const organizationLd = {
     <slot />
   </main>
   <Footer />
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Закрыть">&times;</button>
+    <img class="lightbox__img" id="lightboxImg" src="" alt="" />
+  </div>
+
+  <script is:inline>
+    (function () {
+      var lightbox = document.getElementById('lightbox');
+      var lightboxImg = document.getElementById('lightboxImg');
+      var closeBtn = document.getElementById('lightboxClose');
+
+      function open(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        lightbox.classList.add('is-open');
+      }
+      function close() {
+        lightbox.classList.remove('is-open');
+        lightboxImg.src = '';
+      }
+
+      document.addEventListener('click', function (e) {
+        var img = e.target.closest('img[data-lightbox]');
+        if (img) { open(img.currentSrc || img.src, img.alt); return; }
+        if (e.target === closeBtn || e.target === lightbox) { close(); }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    })();
+  </script>
 </body>
 </html>
