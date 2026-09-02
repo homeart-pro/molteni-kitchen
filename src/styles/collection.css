@@ -32,6 +32,8 @@
 .col-intro__name { font-family: var(--font-heading); font-size: 28px; font-weight: 500; margin: 0 0 12px; }
 .col-intro__lead { font-size: 18px; color: var(--color-dark); margin: 0 0 16px; }
 .col-intro__body { font-size: 15px; line-height: 1.75; color: var(--color-muted); margin: 0; }
+.col-intro__designer { font-size: 14px; color: var(--color-muted); margin: 16px 0 0; }
+.col-intro__designer strong { color: var(--color-dark); font-weight: 500; }
 .col-intro__image img { width: 100%; border-radius: 4px; }
 
 /* HIGHLIGHTS — real, specific facts, kept visually separate from body prose */
@@ -53,17 +55,20 @@
 }
 .col-highlights__list li:first-child { border-top: none; padding-top: 0; }
 
-/* DETAIL GALLERY — 3 photos, no tabs */
-.col-detail__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+/* PHOTO GALLERY — real photo count varies per collection (6 to 12+) */
+.col-detail__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
 .col-detail__grid img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 4px; }
 @media (max-width: 767px) {
-  .col-detail__grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .col-detail__grid { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 28px; }
 }
 
-/* DESIGNER — centered, same pattern as physis */
-.col-designer { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 560px; margin: 0 auto; }
-.col-designer__photo { width: 128px; height: 128px; margin-bottom: 24px; }
-.col-designer__photo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+/* DESIGNER — name and bio only, no portrait */
+.col-designer { max-width: 560px; margin: 0 auto; text-align: center; }
 .col-designer__name { margin-bottom: 16px; }
 .col-designer__text { font-size: 15px; line-height: 1.75; color: var(--color-muted); margin: 0; }
 
