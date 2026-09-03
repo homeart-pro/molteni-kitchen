@@ -5,28 +5,67 @@ import '../styles/pages.css';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <Base
-  title="Шоурум Molteni Kitchen в России"
-  description="Шоурум официального дилера Molteni&C в России — адрес, часы работы, запись на визит."
+  title="Шоурум Molteni Kitchen в России — HOMEART"
+  description="Шоурум официального дилера Molteni&C в России: Москва, ул. 3-я Фрунзенская, 1. Адрес, часы работы, запись на визит."
   headerTransparent={false}
+  ogImage={`${base}/images/showroom-main.jpg`}
 >
-  <section class="page-hero">
-    <span class="page-hero__eyebrow">( Шоурум )</span>
-    <h1 class="page-hero__title">Посетите шоурум</h1>
+  <section class="showroom-hero">
+    <img src={`${base}/images/showroom-main.jpg`} alt="Шоурум HOMEART" class="showroom-hero__bg" loading="eager" fetchpriority="high" data-lightbox />
+    <div class="showroom-hero__overlay"></div>
+    <div class="showroom-hero__content container">
+      <span class="showroom-hero__eyebrow">( Шоурум )</span>
+      <h1 class="showroom-hero__title">HOMEART</h1>
+      <p class="showroom-hero__subtitle">Официальный дилер Molteni&amp;C в России</p>
+    </div>
   </section>
 
   <section class="section section--white">
     <div class="container page-body">
       <p>
+        HOMEART — не просто шоурум предметов интерьера, а пространство профессиональной комплектации
+        жилых и коммерческих объектов. Компания сопровождает каждый проект: от подбора мебели, кухонь,
+        света, сантехники, дверей и искусства до поставки, монтажа и последующего сервиса.
+      </p>
+      <p>
+        HOMEART сотрудничает с ведущими европейскими фабриками, среди которых <strong>Molteni&amp;C</strong>,
+        TM Italia, Bonaldo, Capital, Frigerio, Meridiani, Flos, Rakumba, Antonio Lupi и Lualdi.
         В шоуруме можно увидеть материалы отделки, конфигурации и фурнитуру Molteni&amp;C вживую,
         обсудить проект с консультантом и подобрать решение под ваш интерьер.
       </p>
-      <h2>Адрес и часы работы</h2>
-      <p><em>Адрес шоурума уточняется — заполните перед публикацией сайта.</em></p>
-      <h2>Запись на визит</h2>
-      <p>
-        Оставьте контакты на <a href={`${base}/contacts`} style="text-decoration: underline;">странице контактов</a>,
-        и мы согласуем удобное время визита.
-      </p>
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="container showroom-facts">
+      <div class="showroom-fact"><strong>500+</strong><span>проектов реализовано в России и за рубежом</span></div>
+      <div class="showroom-fact"><strong>10+ лет</strong><span>практики в профессиональной комплектации</span></div>
+      <div class="showroom-fact"><strong>300+</strong><span>фабрик-партнёров по всему миру</span></div>
+    </div>
+  </section>
+
+  <section class="section section--white">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <dl>
+          <dt>Адрес</dt>
+          <dd>Москва, ул. 3-я Фрунзенская, 1</dd>
+          <dt>Часы работы</dt>
+          <dd>Пн–Пт 10:00–19:00<br />Сб 12:00–18:00</dd>
+          <dt>Телефон</dt>
+          <dd><a href="tel:+79256021443">+7 925 602-14-43</a></dd>
+        </dl>
+      </div>
+      <div>
+        <h2 class="page-body__cta-title">Запись на визит</h2>
+        <p>Оставьте контакты — согласуем удобное время визита в шоурум.</p>
+        <form class="contact-form">
+          <input type="text" name="name" placeholder="Ваше имя" required />
+          <input type="tel" name="phone" placeholder="Телефон" required />
+          <button type="submit" class="ghost-btn">Записаться</button>
+        </form>
+        <p class="contact-form__note" style="margin-top:16px;">Форма — заглушка прототипа, без реальной отправки.</p>
+      </div>
     </div>
   </section>
 </Base>
