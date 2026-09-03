@@ -31,10 +31,21 @@
 .col-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .col-intro__name { font-family: var(--font-heading); font-size: 28px; font-weight: 500; margin: 0 0 12px; }
 .col-intro__lead { font-size: 18px; color: var(--color-dark); margin: 0 0 16px; }
-.col-intro__body { font-size: 15px; line-height: 1.75; color: var(--color-muted); margin: 0; }
 .col-intro__designer { font-size: 14px; color: var(--color-muted); margin: 16px 0 0; }
 .col-intro__designer strong { color: var(--color-dark); font-weight: 500; }
 .col-intro__image img { width: 100%; border-radius: 4px; }
+
+/* STORY — each real paragraph paired with its own real photo, alternating sides */
+.col-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.col-story--reverse .col-story__text { order: 2; }
+.col-story--reverse .col-story__image { order: 1; }
+.col-story__text { font-size: 16px; line-height: 1.8; color: var(--color-muted); margin: 0; }
+.col-story__image img { width: 100%; border-radius: 4px; aspect-ratio: 4/3; object-fit: cover; }
 
 /* HIGHLIGHTS — real, specific facts, kept visually separate from body prose */
 .col-highlights { max-width: 640px; margin: 0 auto; text-align: center; }
@@ -84,10 +95,12 @@
 .col-other-card p { font-size: 12px; color: var(--color-muted); margin: 0; }
 
 @media (max-width: 900px) {
-  .col-intro { grid-template-columns: 1fr; }
+  .col-intro, .col-story { grid-template-columns: 1fr; }
+  .col-story--reverse .col-story__text,
+  .col-story--reverse .col-story__image { order: initial; }
 }
 @media (max-width: 767px) {
   .col-hero { min-height: 500px; height: 85vh; }
-  .col-intro, .col-other { gap: 32px; }
-  .col-intro > *, .col-other > * { min-width: 0; }
+  .col-intro, .col-other, .col-story { gap: 32px; }
+  .col-intro > *, .col-other > *, .col-story > * { min-width: 0; }
 }

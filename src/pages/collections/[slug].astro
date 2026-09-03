@@ -23,6 +23,20 @@ const photoFiles = fs.existsSync(photoDir)
       .sort()
   : [];
 const [introPhoto, ...galleryPhotos] = photoFiles;
+// Pair each real paragraph with its own real photo (matches molteni.it: text + photo together,
+// not text-block-then-separate-gallery). Leftover photos still get shown in the grid below.
+const storyBlocks = collection.body.map((text, i) => ({ text, photo: galleryPhotos[i] }));
+const remainingPhotos = galleryPhotos.slice(collection.body.length);
+
+// Background alternation is computed, not hand-picked — section count before
+// Designer/Form/Other varies per collection (story block count differs), so a
+// hardcoded warm/white sequence would drift out of sync.
+const sectionsBeforeDesigner =
+  1 /* intro */ + storyBlocks.length + (collection.highlights.length > 0 ? 1 : 0) + (remainingPhotos.length > 0 ? 1 : 0);
+const bg = (index: number) => (index % 2 === 0 ? 'section--warm' : 'section--white');
+const designerBg = bg(sectionsBeforeDesigner);
+const formBg = bg(sectionsBeforeDesigner + (collection.designer ? 1 : 0));
+const otherBg = bg(sectionsBeforeDesigner + (collection.designer ? 1 : 0) + 1);
 
 const others = collections.filter((c) => c.slug !== collection.slug).slice(0, 2);
 
@@ -30,7 +44,7 @@ const productLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: `${collection.name} — Molteni&C`,
-  description: `${collection.lead} ${collection.body}`.trim(),
+  description: `${collection.lead} ${collection.body.join(' ')}`.trim(),
   brand: { '@type': 'Brand', name: 'Molteni&C' },
   ...(collection.designer && { creator: { '@type': 'Person', name: collection.designer } }),
   image: new URL(`${base}/images/collections/${collection.slug}-cover.jpg`, Astro.site).toString(),
@@ -63,7 +77,6 @@ const productLd = {
       <div>
         <h2 class="col-intro__name">{collection.name}</h2>
         <p class="col-intro__lead">{collection.lead}</p>
-        <p class="col-intro__body">{collection.body}</p>
         {collection.designer && (
           <p class="col-intro__designer"><strong>Дизайн:</strong> {collection.designer}</p>
         )}
@@ -76,9 +89,23 @@ const productLd = {
     </div>
   </section>
 
+  <!-- STORY — each real paragraph paired with its own real photo, alternating sides -->
+  {storyBlocks.map((block, i) => (
+    <section class={`section ${i % 2 === 0 ? 'section--white' : 'section--warm'}`}>
+      <div class={`container col-story ${i % 2 === 1 ? 'col-story--reverse' : ''}`}>
+        <p class="col-story__text">{block.text}</p>
+        {block.photo && (
+          <div class="col-story__image">
+            <img src={`${base}/images/collections/${collection.slug}/${block.photo}`} alt={`${collection.name} — фото ${i + 2}`} loading="lazy" data-lightbox />
+          </div>
+        )}
+      </div>
+    </section>
+  ))}
+
   <!-- HIGHLIGHTS — real, specific facts, shown separately so they don't get lost in prose -->
   {collection.highlights.length > 0 && (
-    <section class="section section--white">
+    <section class={`section ${storyBlocks.length % 2 === 0 ? 'section--white' : 'section--warm'}`}>
       <div class="container col-highlights">
         <span class="caption">Особенности</span>
         <ul class="col-highlights__list">
@@ -88,14 +115,14 @@ const productLd = {
     </section>
   )}
 
-  <!-- FULL PHOTO GALLERY — every real photo available for this collection -->
-  {galleryPhotos.length > 0 && (
-    <section class="section section--warm col-detail">
+  <!-- REMAINING PHOTOS — every other real photo, shown as a gallery grid -->
+  {remainingPhotos.length > 0 && (
+    <section class="section section--white col-detail">
       <div class="container">
-        <span class="caption">Галерея</span>
+        <span class="caption">Ещё фото</span>
         <div class="col-detail__grid">
-          {galleryPhotos.map((file, i) => (
-            <img src={`${base}/images/collections/${collection.slug}/${file}`} alt={`${collection.name} — фото ${i + 2}`} loading="lazy" data-lightbox />
+          {remainingPhotos.map((file, i) => (
+            <img src={`${base}/images/collections/${collection.slug}/${file}`} alt={`${collection.name} — фото`} loading="lazy" data-lightbox />
           ))}
         </div>
       </div>
@@ -104,7 +131,7 @@ const productLd = {
 
   <!-- DESIGNER — name and bio only, no photo -->
   {collection.designer && (
-    <section class="section section--white">
+    <section class={`section ${designerBg}`}>
       <div class="container col-designer">
         <h2 class="heading col-designer__name">{collection.designer}</h2>
         {collection.designerBio && <p class="col-designer__text">{collection.designerBio}</p>}
@@ -113,7 +140,7 @@ const productLd = {
   )}
 
   <!-- FORM -->
-  <section class="section section--warm" id="form">
+  <section class={`section ${formBg}`} id="form">
     <div class="container col-form">
       <span class="caption">Консультация</span>
       <h2 class="heading">Обсудить проект<br />из коллекции {collection.name}</h2>
@@ -128,7 +155,7 @@ const productLd = {
   </section>
 
   <!-- OTHER COLLECTIONS -->
-  <section class="section section--white">
+  <section class={`section ${otherBg}`}>
     <div class="container" style="text-align:center;">
       <span class="caption">Коллекции</span>
       <h2 class="heading">Смотрите также</h2>
