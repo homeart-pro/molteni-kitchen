@@ -14,6 +14,7 @@ const links = [
     <nav class="hdr__nav">
       {links.map(l => <a href={l.href} class="hdr__link">{l.label}</a>)}
     </nav>
+    <a href="tel:+79256021443" class="hdr__phone">+7 925 602-14-43</a>
     <button class="hdr__burger" id="hdrBurger" aria-label="Меню">
       <span></span><span></span><span></span>
     </button>
@@ -24,6 +25,7 @@ const links = [
   <nav class="mobile-menu__nav">
     {links.map(l => <a href={l.href} class="mobile-menu__link">{l.label}</a>)}
   </nav>
+  <a href="tel:+79256021443" class="mobile-menu__phone">+7 925 602-14-43</a>
 </div>
 
 <style>
@@ -71,6 +73,17 @@ const links = [
   .hdr.is-scrolled .hdr__link { color: var(--color-dark); }
   .hdr__link:hover { color: var(--color-sand); }
 
+  .hdr__phone {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--color-white);
+    white-space: nowrap;
+    margin-left: 8px;
+    transition: color 0.3s ease;
+  }
+  .hdr.is-scrolled .hdr__phone { color: var(--color-dark); }
+  .hdr__phone:hover { color: var(--color-sand); }
+
   .hdr__burger {
     display: none;
     width: 44px; height: 44px;
@@ -103,9 +116,16 @@ const links = [
     color: var(--color-white);
     min-height: 44px;
   }
+  .mobile-menu__phone {
+    margin-top: 12px;
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    color: var(--color-sand);
+  }
 
   @media (max-width: 900px) {
     .hdr__nav { display: none; }
+    .hdr__phone { display: none; }
     .hdr__burger { display: flex; }
   }
 </style>

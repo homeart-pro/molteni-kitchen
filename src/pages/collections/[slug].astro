@@ -28,6 +28,19 @@ const [introPhoto, ...galleryPhotos] = photoFiles;
 const storyBlocks = collection.body.map((text, i) => ({ text, photo: galleryPhotos[i] }));
 const remainingPhotos = galleryPhotos.slice(collection.body.length);
 
+// Content-rich alt text built from the real paragraph/highlight paired with each photo,
+// instead of a generic "фото N" — the paragraph already describes what that photo shows.
+function altFromText(name: string, text: string, maxLen = 140) {
+  const clean = text.replace(/\s*\(источник:[^)]*\)\.?\s*$/i, '').trim();
+  if (clean.length <= maxLen) return `${name} — ${clean}`;
+  const cut = clean.slice(0, maxLen);
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${name} — ${cut.slice(0, lastSpace)}…`;
+}
+function altFromHighlight(name: string, highlights: string[], i: number) {
+  return highlights.length > 0 ? `${name} — ${highlights[i % highlights.length]}` : `${name} — деталь кухни`;
+}
+
 // Background alternation is computed, not hand-picked — section count before
 // Designer/Form/Other varies per collection (story block count differs), so a
 // hardcoded warm/white sequence would drift out of sync.
@@ -96,7 +109,7 @@ const productLd = {
         <p class="col-story__text">{block.text}</p>
         {block.photo && (
           <div class="col-story__image">
-            <img src={`${base}/images/collections/${collection.slug}/${block.photo}`} alt={`${collection.name} — фото ${i + 2}`} loading="lazy" data-lightbox />
+            <img src={`${base}/images/collections/${collection.slug}/${block.photo}`} alt={altFromText(collection.name, block.text)} loading="lazy" data-lightbox />
           </div>
         )}
       </div>
@@ -122,7 +135,7 @@ const productLd = {
         <span class="caption">Ещё фото</span>
         <div class="col-detail__grid">
           {remainingPhotos.map((file, i) => (
-            <img src={`${base}/images/collections/${collection.slug}/${file}`} alt={`${collection.name} — фото`} loading="lazy" data-lightbox />
+            <img src={`${base}/images/collections/${collection.slug}/${file}`} alt={altFromHighlight(collection.name, collection.highlights, i)} loading="lazy" data-lightbox />
           ))}
         </div>
       </div>
